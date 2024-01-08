@@ -8,6 +8,7 @@ import torch
 
 from clip import BaseClip
 
+
 class MetaManager:
     LABEL_LST_SERIALIZE_PATH = "label_lst.pkl"
     ATTR_LST_SERIALIZE_PATH = "attr_lst.pkl"
@@ -21,23 +22,23 @@ class MetaManager:
     def resume(self, resume_path: str):
         label_lst_file_path = os.path.join(resume_path, self.LABEL_LST_SERIALIZE_PATH)
         attr_lst_file_path = os.path.join(resume_path, self.ATTR_LST_SERIALIZE_PATH)
-        
+
         if os.path.exists(label_lst_file_path):
-            with open(label_lst_file_path, 'rb') as f:
+            with open(label_lst_file_path, "rb") as f:
                 self.label_lst = pickle.load(f)
-                
+
         if os.path.exists(attr_lst_file_path):
-            with open(attr_lst_file_path, 'rb') as f:
+            with open(attr_lst_file_path, "rb") as f:
                 self.attr_lst = pickle.load(f)
 
     def serialize(self, file_path: str):
         label_lst_file_path = os.path.join(file_path, self.LABEL_LST_SERIALIZE_PATH)
         attr_lst_file_path = os.path.join(file_path, self.ATTR_LST_SERIALIZE_PATH)
-        
-        with open(label_lst_file_path, 'wb') as f:
+
+        with open(label_lst_file_path, "wb") as f:
             pickle.dump(self.label_lst, f)
-            
-        with open(attr_lst_file_path, 'wb') as f:
+
+        with open(attr_lst_file_path, "wb") as f:
             pickle.dump(self.attr_lst, f)
 
     def insert(self, label: str, attr: str):
@@ -51,12 +52,13 @@ class MetaManager:
             self.attr_lst.pop(index)
             return index
         return None
-        
+
     def get_label(self, idx: int):
         return self.label_lst[idx]
-    
+
     def get_attr(self, idx: int):
         return self.attr_lst[idx]
+
 
 class BaseRetrieval(ABC):
     def __init__(self, clip: BaseClip, resume_path: str = None):
@@ -64,20 +66,14 @@ class BaseRetrieval(ABC):
         self.clip = clip
         if resume_path is not None:
             self.resume(resume_path)
-    
+
     def serialize(self, file_path: str):
         if not os.path.exists(file_path):
             os.makedirs(file_path)
         self.meta_manager.serialize(file_path)
         self.serialize_internal(file_path)
 
-    def insert_vid(
-        self,
-        video_path: str,
-        label: str,
-        attr: str = None,
-        **kwargs
-    ):
+    def insert_vid(self, video_path: str, label: str, attr: str = None, **kwargs):
         self.meta_manager.insert(label, attr)
         self.insert_vid_internal(video_path, **kwargs)
 
@@ -88,21 +84,17 @@ class BaseRetrieval(ABC):
         idx = self.meta_manager.delete(label)
         if idx is not None:
             self.delete_vid_internal(idx)
-    
-    def retrieval_vid(
-        self,
-        text: str,
-        **kwargs
-    ):
+
+    def retrieval_vid(self, text: str, **kwargs):
         index, score = self.retrieval_vid_internal(text, **kwargs)
-        return self.meta_manager.get_label(index), self.meta_manager.get_attr(index), score
+        return (
+            self.meta_manager.get_label(index),
+            self.meta_manager.get_attr(index),
+            score,
+        )
 
     @abstractmethod
-    def retrieval_vid_internal(
-        self,
-        text: str,
-        **kwargs
-    ):
+    def retrieval_vid_internal(self, text: str, **kwargs):
         pass
 
     @abstractmethod
@@ -116,8 +108,7 @@ class BaseRetrieval(ABC):
     @abstractmethod
     def resume(self, resume_path: str):
         pass
-    
+
     @abstractmethod
     def serialize_internal(self, file_path: str):
         pass
-        

@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
-class RetrievalConfig(BaseModel):
 
+class RetrievalConfig(BaseModel):
     clip_type: str = "ViCLIP"
     """
     Indicates the clip type, available types=["ViCLIP"]
@@ -24,7 +24,7 @@ class RetrievalConfig(BaseModel):
     """
 
     resume_path: str = None
-    
+
     video_dir: str = None
 
     retrieval_text_file: str = None

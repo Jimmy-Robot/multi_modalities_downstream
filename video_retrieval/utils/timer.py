@@ -6,6 +6,7 @@ import time
 
 from utils.logger import logger
 
+
 class Timer:
     def __init__(self, tag: str):
         self._tag = tag
@@ -44,11 +45,13 @@ def timed_method(method):
     def wrapped(*args, **kwargs):
         if logger.level <= logging.DEBUG:
             method_name = method.__name__
-            cls_name = args[0].__class__.__name__ if args and hasattr(args[0], "__class__") else ""
+            cls_name = (
+                args[0].__class__.__name__
+                if args and hasattr(args[0], "__class__")
+                else ""
+            )
             tag = f"{cls_name}::{method_name}"
             with Timer(tag):
                 return method(*args, **kwargs)
         else:
             return method(*args, **kwargs)
-
-
