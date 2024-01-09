@@ -34,8 +34,6 @@ _PT_NAME = {
     "ViT-L/14": "ViT-L-14.pt",
 }
 
-from ipdb import set_trace
-
 
 def _download(url: str, root: str = os.path.expanduser("~/.cache/clip")):
     os.makedirs(root, exist_ok=True)

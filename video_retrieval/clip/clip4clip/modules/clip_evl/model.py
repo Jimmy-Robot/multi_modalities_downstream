@@ -9,7 +9,6 @@ from torch import nn
 from . import evl_utils
 from .evl_utils import TransformerDecoder_uniformer_diff_conv_balance
 from einops import rearrange
-from ipdb import set_trace
 from copy import deepcopy
 from torch.utils.checkpoint import checkpoint_sequential
 

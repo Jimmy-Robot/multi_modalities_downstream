@@ -9,7 +9,6 @@ import torch.nn.functional as F
 import torch.utils.checkpoint as checkpoint
 
 from .attention import MultiheadAttention
-from ipdb import set_trace
 
 
 MODEL_PATH = "/mnt/lustre/share_data/likunchang.vendor/model"
