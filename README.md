@@ -5,10 +5,10 @@ conda activate video_retrieval
 export HUGGINGFACE_TOKEN=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
 
 ## ViClip Model
-./video_retrieval/tasks/retrieval_task/retrieval.sh init_retrieval.json
+./video_retrieval/tasks/retrieval_task/retrieval.sh ./video_retrieval/tasks/retrieval_task/init_retrieval_clip4clip.json
 ## CLIP4Clip Model
-./video_retrieval/tasks/retrieval_task/retrieval.sh init_retrieval_clip4clip.json
+./video_retrieval/tasks/retrieval_task/retrieval.sh ./video_retrieval/tasks/retrieval_task/init_retrieval_clip4clip.json
 
 # resume
-./video_retrieval/tasks/retrieval_task/retrieval.sh resume_retrieval.json
+./video_retrieval/tasks/retrieval_task/retrieval.sh ./video_retrieval/tasks/retrieval_task/resume_retrieval.json
 

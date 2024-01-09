@@ -1,8 +1,8 @@
 {
     "clip_type": "ViCLIP",
     "searcher_type": "ANN_BF",
-    "video_dir": "/code/wpsy-1-scene",
-    "retrieval_text_file": "/code/wpsy_query.json",
-    "retrieval_result_file_path": "/code/retrieval_result.json",
-    "resume_path": "/code/wpsy_retrieval/"
+    "video_dir": "/root/wpsy-1",
+    "retrieval_text_file": "/root/multi_modalities_downstream/video_retrieval/tasks/retrieval_task/query_demo/query.json",
+    "retrieval_result_file_path": "/root/retrieval_res/retrieval_result_test.json",
+    "resume_path": "/root/wpsy_retrieval/"
 }
