@@ -5,6 +5,7 @@ from pydantic import ValidationError
 
 from retrieval.ann_based_retrieval import BruteforceRetrieval
 from clip.vi_clip import ViCLIPAdapter
+from clip.clip4clip import CLIP4ClipAdaptor
 from tasks.config import RetrievalConfig
 from utils.logger import logger, setup_logger
 
@@ -34,6 +35,8 @@ def run_retrieval_task(config_path: str):
 
     if config.clip_type == "ViCLIP":
         clip = ViCLIPAdapter()
+    elif config.clip_type == "CLIP4Clip":
+        clip = CLIP4ClipAdaptor()
     else:
         logger.error(f"can't found: {config.clip_type}")
         return

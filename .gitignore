@@ -1,2 +1,7 @@
 __pycache__/
 *.json
+
+# ckpts or tokernizers
+video_retrieval/clip/vi_clip/ViCLIP/clip_model/
+video_retrieval/clip/vi_clip/ViCLIP/tokenizer/
+video_retrieval/clip/clip4clip/modules/pytorch_model.bin

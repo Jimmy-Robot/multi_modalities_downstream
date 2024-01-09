@@ -135,7 +135,6 @@ class ViCLIP(nn.Module):
             - pooled_vision_embeds (torch.Tensor): The pooled features. Shape: [B,T,C].
 
         """
-        # print("[XZL DEBUG], image shape", image.shape)
         if image.ndim == 5:
             image = image.permute(0, 2, 1, 3, 4).contiguous()
         else:
@@ -226,7 +225,6 @@ class ViCLIP(nn.Module):
     def get_vid_features(self, input_frames):
         with torch.no_grad():
             clip_feat = self.encode_vision(input_frames, test=True).float()
-            # print("[XZL DEBUG] clip_feat shape", clip_feat.shape)
             clip_feat /= clip_feat.norm(dim=-1, keepdim=True)
         return clip_feat
 
